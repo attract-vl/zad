@@ -20,9 +20,11 @@ public class LoginPage {
     }
 
     @Before
-    public void mainPage() {
-        open("/");
+    public void logInPage() {
+        open("/sign-in");
     }
+
+    //============== design ==================
 
     @Test
     public void logoIsVisible() {
@@ -38,27 +40,6 @@ public class LoginPage {
     }
 
     @Test
-    public void bannerBlockIsVisible() {
-        $(".jss1").shouldBe(visible);
-        $(".btn.btn_white.m-auto.styles_btn__3EXuK").shouldBe(visible);
-
-    }
-
-    @Test
-    public void categoriesText() {
-//        $$(".styles_h2__Yn_NB.styles_titleLink__1JtNm").shouldHave(size(4));
-        $$(".styles_h2__Yn_NB.styles_titleLink__1JtNm").get(0).shouldHave(text("MARBLE SLAB"));
-        $$(".styles_h2__Yn_NB.styles_titleLink__1JtNm").get(1).shouldHave(text("GREAT AMERICAN COOKIES"));
-        $$(".styles_h2__Yn_NB.styles_titleLink__1JtNm").get(2).shouldHave(text("CAKES"));
-        $$(".styles_h2__Yn_NB.styles_titleLink__1JtNm").get(3).shouldHave(text("EVENTS AND PARTIES"));
-    }
-
-    @Test
-    public void buttonOrderNowIsVisible() {
-        $(".btn_white.styles_orderNowBtn__2qWQ3").shouldBe(visible);
-    }
-
-    @Test
     public void sideMenuText() {
         $$(".MuiListItem-root.style_itemLeaf__1ZE09.style_sidebarLinks__2bMOA").get(0).shouldHave(text("Order Now"));
         $$(".MuiListItem-root.style_itemLeaf__1ZE09.style_sidebarLinks__2bMOA").get(1).shouldHave(text("What’s New"));
@@ -68,17 +49,96 @@ public class LoginPage {
 
     @Test
     public void footerText() {
-        $(".MuiBox-root.jss21").shouldBe(visible).shouldHave(
+        $(".copyright").shouldBe(visible).shouldHave(
                 text("©Copyright 2021. All rights reserved."),
-                text("Terms and Conditions")
+                text("Privacy policy")
+//                text("Terms and Conditions")
         );
     }
 
-    @Test
-    public void clickOnLogInButton() {
-        $(".styles_header_btn__2ESOZ.styles_mr_20__30uV6").click();
-        $(byText("Don’t have an account? Register Now")).shouldBe(visible);
+    //--------------------------------------------------
 
+    @Test
+    public void informText() {
+        $(".jss1").shouldHave(
+                text("Don’t have an account? Register Now"));
     }
+
+    @Test
+    public void emailFieldIsVisible() {
+        $(".jss2").shouldBe(visible);
+    }
+
+    @Test
+    public void passwordFieldIsVisible() {
+        $(".jss3").shouldBe(visible);
+    }
+
+    @Test
+    public void checkboxVisible() {
+        $("span.MuiButtonBase-root > span:nth-child(2)").shouldBe(visible);
+    }
+
+    @Test
+    public void checkboxText() {
+        $(".MuiTypography-body1").shouldHave(text("Remember me"));
+    }
+
+    @Test
+    public void checkboxIsChecked() {
+        $(".MuiCheckbox-root").click();
+        $(".Mui-checked").shouldBe(visible);
+    }
+
+    @Test
+    public void forgotLinkText() {
+        $("div.MuiGrid-root:nth-child(2) > a:nth-child(1)").shouldHave(text("Forgot password?"));
+    }
+
+    @Test
+    public void clickOnForgotLink() {
+        $("div.MuiGrid-root:nth-child(2) > a:nth-child(1)").click();
+        $(".styles_h1__1e8I0").shouldHave(text("Forgot password"));
+    }
+
+    @Test
+    public void buttonLogInIsVisible() {
+        $(".MuiButton-contained").shouldBe(visible);
+    }
+
+    @Test
+    public void buttonLogInWithGoogleIsVisible() {
+        $$(".styles_btnSocial__3_Jx6").get(0).shouldBe(visible);
+    }
+
+    @Test
+    public void buttonLogInWithInstagramIsVisible() {
+        $$(".styles_btnSocial__3_Jx6").get(1).shouldBe(visible);
+    }
+
+    //=============
+
+//    @Test
+//    public void sideMenuText() {
+//        $$(".MuiListItem-root.style_itemLeaf__1ZE09.style_sidebarLinks__2bMOA").get(0).shouldHave(text("Order Now"));
+//        $$(".MuiListItem-root.style_itemLeaf__1ZE09.style_sidebarLinks__2bMOA").get(1).shouldHave(text("What’s New"));
+//        $$(".MuiListItem-root.style_itemLeaf__1ZE09.style_sidebarLinks__2bMOA").get(2).shouldHave(text("Locations"));
+//        $$(".MuiListItem-root.style_itemLeaf__1ZE09.style_sidebarLinks__2bMOA").get(3).shouldHave(text("Contact Us"));
+//    }
+//
+//    @Test
+//    public void footerText() {
+//        $(".MuiBox-root.jss21").shouldBe(visible).shouldHave(
+//                text("©Copyright 2021. All rights reserved."),
+//                text("Terms and Conditions")
+//        );
+//    }
+//
+//    @Test
+//    public void clickOnLogInButton() {
+//        $(".styles_header_btn__2ESOZ.styles_mr_20__30uV6").click();
+//        $(byText("Don’t have an account? Register Now")).shouldBe(visible);
+//
+//    }
 
 }

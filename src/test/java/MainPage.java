@@ -75,7 +75,8 @@ public class MainPage {
     public void footerText() {
         $(".MuiBox-root.jss21").shouldBe(visible).shouldHave(
                 text("©Copyright 2021. All rights reserved."),
-                text("Terms and Conditions")
+                text("Privacy policy")
+//                text("Terms and Conditions")
         );
     }
 
@@ -83,7 +84,6 @@ public class MainPage {
     public void clickOnLogInButton() {
         $(".styles_header_btn__2ESOZ.styles_mr_20__30uV6").click();
         $(byText("LOG IN")).shouldBe(visible);
-
     }
 
     @Test
