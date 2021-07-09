@@ -11,7 +11,7 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 
-public class MainPage {
+public class MainPageTest {
 
     @BeforeClass
     public static void setUp() {
@@ -33,8 +33,8 @@ public class MainPage {
 
     @Test
     public void headerElementsIsVisible() {
-        $(".styles_header_btn__2ESOZ.styles_mr_20__30uV6").shouldBe(visible);
-        $(".styles_header_btn__2ESOZ").shouldBe(visible);
+        $$(".styles_header_btn__2ESOZ").get(0).shouldBe(visible);
+        $$(".styles_header_btn__2ESOZ").get(1).shouldBe(visible);
         $(".styles_header_block__3Ci3M.styles_cart__OKkOy").shouldBe(visible);
         $(".styles_header_block__3Ci3M.styles_lang__3FOzf").shouldBe(visible);
     }
@@ -55,7 +55,7 @@ public class MainPage {
 
     @Test
     public void pageImages() {
-        $$("img").shouldHave(size(6));
+        $$("img").shouldHave(size(5));
     }
 
     @Test
@@ -66,7 +66,7 @@ public class MainPage {
     @Test
     public void sideMenuText() {
         $$(".MuiListItem-root.style_itemLeaf__1ZE09.style_sidebarLinks__2bMOA").get(0).shouldHave(text("Order Now"));
-        $$(".MuiListItem-root.style_itemLeaf__1ZE09.style_sidebarLinks__2bMOA").get(1).shouldHave(text("What’s New"));
+        $$(".MuiListItem-root.style_itemLeaf__1ZE09.style_sidebarLinks__2bMOA").get(1).shouldHave(text("What’S New"));
         $$(".MuiListItem-root.style_itemLeaf__1ZE09.style_sidebarLinks__2bMOA").get(2).shouldHave(text("Locations"));
         $$(".MuiListItem-root.style_itemLeaf__1ZE09.style_sidebarLinks__2bMOA").get(3).shouldHave(text("Contact Us"));
     }
@@ -74,15 +74,15 @@ public class MainPage {
     @Test
     public void footerText() {
         $(".MuiBox-root.jss21").shouldBe(visible).shouldHave(
-                text("©Copyright 2021. All rights reserved."),
-                text("Privacy policy")
+                text("©Copyright 2021. All rights reserved. Privacy policy")
+//                text("Privacy policy")
 //                text("Terms and Conditions")
         );
     }
 
     @Test
     public void clickOnLogInButton() {
-        $(".styles_header_btn__2ESOZ.styles_mr_20__30uV6").click();
+        $$(".styles_header_btn__2ESOZ").get(0).click();
         $(byText("LOG IN")).shouldBe(visible);
     }
 

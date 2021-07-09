@@ -3,13 +3,14 @@ import com.codeborne.selenide.Configuration;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selectors.*;
 
-public class LoginPage {
+public class LoginPageTest {
 
     @BeforeClass
     public static void setUp() {
@@ -33,8 +34,8 @@ public class LoginPage {
 
     @Test
     public void headerElementsIsVisible() {
-        $(".styles_header_btn__2ESOZ.styles_mr_20__30uV6").shouldBe(visible);
-        $(".styles_header_btn__2ESOZ").shouldBe(visible);
+        $$(".styles_header_btn__2ESOZ").get(0).shouldBe(visible);
+        $$(".styles_header_btn__2ESOZ").get(1).shouldBe(visible);
         $(".styles_header_block__3Ci3M.styles_cart__OKkOy").shouldBe(visible);
         $(".styles_header_block__3Ci3M.styles_lang__3FOzf").shouldBe(visible);
     }
@@ -42,7 +43,7 @@ public class LoginPage {
     @Test
     public void sideMenuText() {
         $$(".MuiListItem-root.style_itemLeaf__1ZE09.style_sidebarLinks__2bMOA").get(0).shouldHave(text("Order Now"));
-        $$(".MuiListItem-root.style_itemLeaf__1ZE09.style_sidebarLinks__2bMOA").get(1).shouldHave(text("What’s New"));
+        $$(".MuiListItem-root.style_itemLeaf__1ZE09.style_sidebarLinks__2bMOA").get(1).shouldHave(text("What’S New"));
         $$(".MuiListItem-root.style_itemLeaf__1ZE09.style_sidebarLinks__2bMOA").get(2).shouldHave(text("Locations"));
         $$(".MuiListItem-root.style_itemLeaf__1ZE09.style_sidebarLinks__2bMOA").get(3).shouldHave(text("Contact Us"));
     }
@@ -50,8 +51,9 @@ public class LoginPage {
     @Test
     public void footerText() {
         $(".copyright").shouldBe(visible).shouldHave(
-                text("©Copyright 2021. All rights reserved."),
-                text("Privacy policy")
+                text("©Copyright 2021. All rights reserved.\n" +
+                        "Privacy Policy")
+//                text("Privacy policy")
 //                text("Terms and Conditions")
         );
     }
@@ -116,29 +118,63 @@ public class LoginPage {
         $$(".styles_btnSocial__3_Jx6").get(1).shouldBe(visible);
     }
 
-    //=============
+    //============= functionality ================
 
-//    @Test
-//    public void sideMenuText() {
-//        $$(".MuiListItem-root.style_itemLeaf__1ZE09.style_sidebarLinks__2bMOA").get(0).shouldHave(text("Order Now"));
-//        $$(".MuiListItem-root.style_itemLeaf__1ZE09.style_sidebarLinks__2bMOA").get(1).shouldHave(text("What’s New"));
-//        $$(".MuiListItem-root.style_itemLeaf__1ZE09.style_sidebarLinks__2bMOA").get(2).shouldHave(text("Locations"));
-//        $$(".MuiListItem-root.style_itemLeaf__1ZE09.style_sidebarLinks__2bMOA").get(3).shouldHave(text("Contact Us"));
-//    }
-//
-//    @Test
-//    public void footerText() {
-//        $(".MuiBox-root.jss21").shouldBe(visible).shouldHave(
-//                text("©Copyright 2021. All rights reserved."),
-//                text("Terms and Conditions")
-//        );
-//    }
-//
-//    @Test
-//    public void clickOnLogInButton() {
-//        $(".styles_header_btn__2ESOZ.styles_mr_20__30uV6").click();
-//        $(byText("Don’t have an account? Register Now")).shouldBe(visible);
-//
-//    }
+    @Test
+    public void messageForEmptyEmailField() {
+        $(By.name("password")).val("Qwer1234-");
+        $(".MuiButton-contained").click();
+        $(".MuiFormHelperText-root").shouldHave(text("email is a required field"));
+    }
+
+    @Test
+    public void messageForEmptyEmailAndPasswordField() {
+        $(".MuiButton-contained").click();
+        $$(".MuiFormHelperText-root").get(0).shouldHave(text("email is a required field"));
+        $$(".MuiFormHelperText-root").get(1).shouldHave(text("password is a required field"));
+    }
+
+    @Test
+    public void messageForIncorrectEmail() {
+        $(By.name("email")).val("vvv111000999");
+//        $(By.name("password")).val("Qwer1234-");
+        $(".MuiButton-contained").click();
+        $(".MuiFormHelperText-root").shouldHave(text("email must be a valid email"));
+    }
+
+    @Test
+    public void messageForUnregisteredEmail() {
+        $(By.name("email")).val("vvv111000999@gmail.com");
+        $(By.name("password")).val("Qwer1234-");
+        $(".MuiButton-contained").click();
+        $(".MuiFormHelperText-root").shouldHave(text("Oops, this email is not registered with Zad-Cakes."));
+    }
+
+    @Test
+    public void messageForIncorrectPassword() {
+        $(By.name("email")).val("vihard.test+us3@gmail.com");
+        $(By.name("password")).val("Qwer1");
+        $(".MuiButton-contained").click();
+        $(".MuiFormHelperText-root").shouldHave(text("password must be at least 8 characters"));
+    }
+
+    @Test
+    public void messageForUnregisteredPassword() {
+        $(By.name("email")).val("vihard.test+us3@gmail.com");
+        $(By.name("password")).val("Qwer1234----");
+        $(".MuiButton-contained").click();
+        $(".error-text").shouldHave(text("The entered password is not correct, please try again"));
+    }
+
+    @Test
+    public void correctAutorisationWithoutCheckbox() {
+        $(By.name("email")).val("vihard.test+us3@gmail.com");
+        $(By.name("password")).val("Qwer1234-");
+        $(".MuiButton-contained").click();
+        $("h1").shouldHave(text("Profile"));
+        $("button.MuiButtonBase-root:nth-child(2)").click();
+    }
+
+
 
 }
