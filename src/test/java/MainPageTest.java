@@ -88,7 +88,8 @@ public class MainPageTest {
 
     @Test
     public void clickOnRegisterButton() {
-        $(byText("Register")).click();
+//        $(byText("Register")).click();
+        $$(".styles_header_btn__2ESOZ").get(1).click();
         $(byText("REGISTER")).shouldBe(visible);
 
     }
