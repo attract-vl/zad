@@ -73,7 +73,7 @@ public class MainPageTest {
 
     @Test
     public void footerText() {
-        $(".MuiBox-root.jss21").shouldBe(visible).shouldHave(
+        $(".copyright").shouldBe(visible).shouldHave(
                 text("©Copyright 2021. All rights reserved. Privacy policy")
 //                text("Privacy policy")
 //                text("Terms and Conditions")
