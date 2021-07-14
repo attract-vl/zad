@@ -17,8 +17,8 @@ public class MainPageTest {
     public static void setUp() {
         closeWebDriver();
 //        Configuration.baseUrl = "https://app.zad-cakes-dev.php-cd.attractgroup.com";
-        Configuration.browserSize = "1980x1080";
-        Configuration.startMaximized = true;
+//        Configuration.browserSize = "1980x1080";
+//        Configuration.startMaximized = true;
     }
 
     @Before
